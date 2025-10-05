@@ -1,75 +1,104 @@
-1) Core do ESP32 (versão exigida)
+# ESP32-S3 + Sunton 7" RGB (800×480) — Setup Guide
 
-Arduino IDE aberto
+> **Modelo do display**: Sunton **ESP32-8048S070** (7", 800×480, RGB)
 
-Vá em Tools → Board → Boards Manager…
+---
 
-Pesquise esp32 (Espressif Systems)
+## 1) Core do ESP32 (versão exigida)
 
-No dropdown de versão, selecione 2.0.14 → Install
+1. Abra o **Arduino IDE**  
+2. Vá em **Tools → Board → Boards Manager…**  
+3. Pesquise **esp32 (Espressif Systems)**  
+4. Selecione a versão **`2.0.14`** → **Install**  
+5. Em **Tools → Board**, selecione **ESP32S3 Dev Module**
 
-Depois selecione a placa em Tools → Board → ESP32 → ESP32S3 Dev Module.
+---
 
-2) Bibliotecas necessárias (versões fixas)
+## 2) Bibliotecas necessárias (versões fixas)
 
-Instale via Sketch → Include Library → Manage Libraries…:
+Instale em **Sketch → Include Library → Manage Libraries…**:
 
-WiFiManager — autor tzapu — versão 0.16.0
+- **WiFiManager** — autor *tzapu* — **`0.16.0`**
+- **lvgl** — autor *kisvegabor* — **`8.3.11`**
+- **LovyanGFX** — **`1.2.7`**
 
-lvgl — autor kisvegabor — versão 8.3.11
+> Use exatamente essas versões para evitar incompatibilidades.
 
-LovyanGFX — versão 1.2.7
+---
 
-Dica: escolha a versão exata no dropdown da Library Manager.
+## 3) Copiar configuração do LVGL
 
-3) Copiar configuração do LVGL
+Copie o arquivo de config do projeto para a pasta de bibliotecas do Arduino:
 
-Copie seu arquivo de config do projeto para o local que o Arduino encontra por padrão:
+- **Origem**: `PixPayApp/lv_conf.h`  
+- **Destino (Windows)**: `C:\Users\<SEU_USUARIO>\Documents\Arduino\libraries\lv_conf.h`  
+- **Destino (macOS)**: `~/Documents/Arduino/libraries/lv_conf.h`  
+- **Destino (Linux)**: `~/Arduino/libraries/lv_conf.h` *(ou)* `~/Documents/Arduino/libraries/lv_conf.h`
 
-Origem: PixPayApp/lv_conf.h
+> Se não existir a pasta `libraries`, crie. Se já houver um `lv_conf.h`, substitua pelo seu.
 
-Destino (Windows):
-C:\Users\<SEU_USUARIO>\Documents\Arduino\libraries\lv_conf.h
+---
 
-macOS: ~/Documents/Arduino/libraries/lv_conf.h
+## 4) (Opcional) Ambiente com Docker (IDE Web)
 
-Linux: ~/Arduino/libraries/lv_conf.h ou ~/Documents/Arduino/libraries/lv_conf.h
+No terminal:
 
-Se a pasta libraries não existir, crie. Se já existir um lv_conf.h, substitua pelo seu.
-
-4) (Opcional) Ambiente via Docker
-
-Se você usa o workspace com IDE web:
-
+```bash
 cd esp32-7inch-display
 docker-compose up esp32-web-ide
-# ou, em versões novas do Docker:
+# ou
 docker compose up esp32-web-ide
+```
 
-5) Ajustes comuns de Tools (ESP32-S3 + display 7" RGB)
+---
 
-CPU Frequency: 240 MHz
+## 5) Configurações recomendadas em **Tools** (ESP32-S3)
 
-PSRAM: OPI PSRAM / Enabled (se disponível na sua placa)
+- **CPU Frequency**: `240 MHz`  
+- **PSRAM**: `OPI PSRAM` / `Enabled` *(se disponível)*  
+- **Flash Mode**: `QIO 80 MHz`  
+- **Partition Scheme**: `Default 4MB with spiffs (1.2MB APP/1.5MB SPIFFS)`  
+- **USB CDC/JTAG**: conforme sua placa (Hardware CDC geralmente OK)
 
-Flash Mode: QIO (80 MHz)
+> Essas opções são típicas para o **Sunton ESP32-8048S070**.
 
-Partition Scheme: “Default 4MB with spiffs (1.2MB APP/1.5MB SPIFFS)” (ou o que seu projeto exigir)
+---
 
-Essas opções podem variar por placa, mas acima é o mais comum para o ESP32-8048S070 (Sunton) 7", 800×480 RGB.
+## 6) Compilar & Enviar
 
-6) Compilar e enviar
+1. Conecte a placa e escolha a **porta** em **Tools → Port**  
+2. **Sketch → Verify/Compile**  
+3. **Sketch → Upload**
 
-Conecte a placa, escolha a porta em Tools → Port
+---
 
-Sketch → Verify/Compile
+## 7) Notas sobre o Display (LovyanGFX)
 
-Sketch → Upload
+- Painel **RGB 800×480**, sincronismo via pinos `henable/hsync/vsync/pclk`  
+- Mantenha a configuração do **LovyanGFX 1.2.7** (pinos e porches) compatível com seu hardware Sunton  
+- Ajustes comuns no painel (exemplo):
+  - `freq_write = 24000000`
+  - Porches típicos:  
+    - `hsync_front_porch = 40`, `hsync_pulse_width = 48`, `hsync_back_porch = 88`  
+    - `vsync_front_porch = 13`, `vsync_pulse_width = 3`, `vsync_back_porch = 32`
 
-Notas rápidas
+---
 
-O display de 7" Sunton (ESP32-8048S070) é RGB 800×480; mantenha a config do LovyanGFX 1.2.7 para esse painel (pinos, porches, etc.) como no seu código.
+## 8) Checklist Rápido
 
-O lv_conf.h controla coisas como LV_COLOR_DEPTH, LV_TICK_CUSTOM, cache de fontes, etc. Garanta que está compatível com 800×480 e sua integração com LovyanGFX.
+- [ ] **Core ESP32 2.0.14** instalado  
+- [ ] **WiFiManager 0.16.0** instalado  
+- [ ] **lvgl 8.3.11** instalado  
+- [ ] **LovyanGFX 1.2.7** instalado  
+- [ ] `lv_conf.h` copiado para a pasta `Arduino/libraries/`  
+- [ ] Board selecionada: **ESP32S3 Dev Module**  
+- [ ] PSRAM habilitada (se aplicável)
 
-Fixar as versões (Core 2.0.14, LVGL 8.3.11, LovyanGFX 1.2.7, WiFiManager 0.16.0) evita incompatibilidades.
+---
+
+## 9) Troubleshooting
+
+- **Erros de compilação do LVGL**: verifique se o `lv_conf.h` certo está em `Documents/Arduino/libraries/` e se a versão do LVGL é **8.3.11**.  
+- **Tela sem imagem**: revise os pinos e porches no seu config do **LovyanGFX** e a rotação do painel.  
+- **PSRAM**: se faltar memória, ative PSRAM em **Tools** e evite buffers gigantes no sketch.  
+- **Mensagens de core dump no boot**: não costumam impedir a execução; se incomodar, desative *Core Dump* nas opções da placa ou faça *Erase Flash*.
