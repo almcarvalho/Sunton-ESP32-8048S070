@@ -102,3 +102,21 @@ docker compose up esp32-web-ide
 - **Tela sem imagem**: revise os pinos e porches no seu config do **LovyanGFX** e a rotação do painel.  
 - **PSRAM**: se faltar memória, ative PSRAM em **Tools** e evite buffers gigantes no sketch.  
 - **Mensagens de core dump no boot**: não costumam impedir a execução; se incomodar, desative *Core Dump* nas opções da placa ou faça *Erase Flash*.
+
+
+---
+
+## Galeria (imagens do repositório)
+
+> As imagens abaixo devem estar no mesmo diretório do `.md` (arquivos: `1.png`, `2.png`, `3.png`, `4.png`).
+
+<table>
+  <tr>
+    <td align="center"><img src="1.png" alt="Imagem 1" width="320"><br><sub>1.png</sub></td>
+    <td align="center"><img src="2.png" alt="Imagem 2" width="320"><br><sub>2.png</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="3.png" alt="Imagem 3" width="320"><br><sub>3.png</sub></td>
+    <td align="center"><img src="4.png" alt="Imagem 4" width="320"><br><sub>4.png</sub></td>
+  </tr>
+</table>
