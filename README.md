@@ -39,20 +39,7 @@ Copie o arquivo de config do projeto para a pasta de bibliotecas do Arduino:
 
 ---
 
-## 4) (Opcional) Ambiente com Docker (IDE Web)
-
-No terminal:
-
-```bash
-cd esp32-7inch-display
-docker-compose up esp32-web-ide
-# ou
-docker compose up esp32-web-ide
-```
-
----
-
-## 5) Configurações recomendadas em **Tools** (ESP32-S3)
+## 4) Configurações recomendadas em **Tools** (ESP32-S3)
 
 - **CPU Frequency**: `240 MHz`  
 - **PSRAM**: `OPI PSRAM` / `Enabled` *(se disponível)*  
@@ -64,7 +51,7 @@ docker compose up esp32-web-ide
 
 ---
 
-## 6) Compilar & Enviar
+## 5) Compilar & Enviar
 
 1. Conecte a placa e escolha a **porta** em **Tools → Port**  
 2. **Sketch → Verify/Compile**  
@@ -72,7 +59,7 @@ docker compose up esp32-web-ide
 
 ---
 
-## 7) Notas sobre o Display (LovyanGFX)
+## 6) Notas sobre o Display (LovyanGFX)
 
 - Painel **RGB 800×480**, sincronismo via pinos `henable/hsync/vsync/pclk`  
 - Mantenha a configuração do **LovyanGFX 1.2.7** (pinos e porches) compatível com seu hardware Sunton  
@@ -84,7 +71,7 @@ docker compose up esp32-web-ide
 
 ---
 
-## 8) Checklist Rápido
+## 7) Checklist Rápido
 
 - [ ] **Core ESP32 2.0.14** instalado  
 - [ ] **WiFiManager 0.16.0** instalado  
@@ -96,7 +83,7 @@ docker compose up esp32-web-ide
 
 ---
 
-## 9) Troubleshooting
+## 8) Troubleshooting
 
 - **Erros de compilação do LVGL**: verifique se o `lv_conf.h` certo está em `Documents/Arduino/libraries/` e se a versão do LVGL é **8.3.11**.  
 - **Tela sem imagem**: revise os pinos e porches no seu config do **LovyanGFX** e a rotação do painel.  
