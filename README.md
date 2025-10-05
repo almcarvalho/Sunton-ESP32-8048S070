@@ -9,5 +9,6 @@ Required Libraries
 WiFiManager by tzapu (version 0.16.0)cd esp32-7inch-display
 lvgl by kisvegabor (version 8.3.11)docker-compose up esp32-web-ide
 LVGL Configuration```
+LovyanGFX 1.2.7
 
 Copy `PixPayApp/lv_conf.h` to `Documents/Arduino/libraries/lv_conf.h`
