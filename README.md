@@ -21,6 +21,8 @@ Instale em **Sketch → Include Library → Manage Libraries…**:
 - **WiFiManager** — autor *tzapu* — **`0.16.0`**
 - **lvgl** — autor *kisvegabor* — **`8.3.11`**
 - **LovyanGFX** — **`1.2.7`**
+- Touch Screen (Library Name: TAMC_GT911
+https://github.com/TAMCTec/gt911-arduino/archive/refs/heads/main.zip)
 
 > Use exatamente essas versões para evitar incompatibilidades.
 
